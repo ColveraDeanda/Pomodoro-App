@@ -16,7 +16,7 @@ const timeDiv = document.querySelector('#time #value');
 renderTime();
 
 
-form.addEventListener('click', e => {
+form.addEventListener('submit', e => {
     e.preventDefault();
     if(itTask.value !== '') {
         createTask(itTask.value);
