@@ -50,6 +50,11 @@ function renderTasks() {
     // Agregando el evento a los botones creados de la plantilla.
     const startButtons = document.querySelectorAll('.task .start-button');
 
+    if(current) {
+        // Setting disabled option for start buttons when task is in progress
+        disableStartButton(startButtons);
+    }
+
     startButtons.forEach(button => {
         button.addEventListener('click', e => {
             if(!timer) {
@@ -74,6 +79,9 @@ function renderTasks() {
                 itTask.setAttributeNode(disabledProperty); // HTML disabled for input.
                 itTask.setAttributeNode(classDisabledInput); // CSS disabled for input.
                 bAdd.setAttributeNode(classDisabledButton); // css disabled for button
+
+                disableStartButton(startButtons);
+
             }   
         })
     })
@@ -97,8 +105,8 @@ function timeHandler(id) {
     if(time === 0) {
         clearInterval(timer);
         markCompleted(id)
-        timer = null;
         renderTasks();
+        timer = null;
         startBreak();
     }
 
@@ -133,13 +141,19 @@ function timerBreakHandler() {
     if(time === 0){
         clearInterval(timerBreak);
         current = null;
+        renderTasks();
         timerBreak = null;
         taskName.textContent = '';
-        renderTasks();
         itTask.removeAttribute('disabled');
         itTask.classList.remove('input-disabled');
         bAdd.classList.remove('button-disabled');
     }
 
 
+}
+
+function disableStartButton(startButtons) {
+    startButtons.forEach(startBtn => {
+        startBtn.classList.add('button-disabled');
+    });
 }
