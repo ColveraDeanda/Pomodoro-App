@@ -35,10 +35,12 @@ function createTask(value) {
 }
 
 function renderTasks() {
-    const html = tasks.map(task => {
+    let count = 0;
+    let html = tasks.map(task => {
+        count++;
         return `
         <div class="task">
-            <div class="completed">${task.completed ? `<span><img src="img/check.png" alt="Task Completed" width="40" height="40"></span>` : `<button class="start-button" data-id="${task.id}">Empezar</button>`}</div>
+            <div class="completed">${task.completed ? `<span><img src="img/check.png" alt="Task Completed" width="40" height="40"></span>` : `<button class="start-button" data-id="${task.id}">Empezar</button> <button class="delete" data-count="${count}"><img src="img/garbage.png" alt="Delete Task"></button> <button class="edit"><img src="img/edit.png" alt="Edit Task"></button>`}</div>
             <div class="title">${task.title}</div>
         </div>
         `;
@@ -49,6 +51,7 @@ function renderTasks() {
 
     // Agregando el evento a los botones creados de la plantilla.
     const startButtons = document.querySelectorAll('.task .start-button');
+    const deleteButtons = document.querySelectorAll('.task .delete');
 
     if(current) {
         // Setting disabled option for start buttons when task is in progress
@@ -83,6 +86,15 @@ function renderTasks() {
                 disableStartButton(startButtons);
 
             }   
+        })
+    });
+
+    // Deleting a task 
+    deleteButtons.forEach(deleteBtn => {
+        deleteBtn.addEventListener('click', e => {
+            const index = deleteBtn.getAttribute('data-count');
+            tasks.splice(index - 1, 1);
+            renderTasks();
         })
     })
 }

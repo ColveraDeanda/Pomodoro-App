@@ -105,6 +105,33 @@ input[type="text"] {
     opacity: 0.65;
 }
 
+.delete {
+    border: none;
+    background-color: #BA0F30;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 6px ;
+}
+
+.delete img {
+    width: 20px;
+    height: 20px;
+}
+
+.edit {
+    border: none;
+    background-color: #3429af;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 6px ;
+}
+
+.edit img {
+    width: 20px;
+    height: 20px;
+    margin-left: 3px;
+}
+
 
 
 
