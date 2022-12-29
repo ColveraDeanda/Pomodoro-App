@@ -1,6 +1,7 @@
 "use strict";
 
 const tasks = [];
+const tasksCompleted = [];
 let time = 0;
 let timer = null;
 let timerBreak = null;
@@ -66,6 +67,8 @@ function renderTasks() {
     if (current) {
         // Setting disabled option for start buttons when task is in progress
         disableStartButton(startButtons);
+        disableStartButton(deleteButtons);
+        disableStartButton(editButtons);
     }
 
     startButtons.forEach((button) => {
@@ -93,7 +96,10 @@ function renderTasks() {
                 itTask.setAttributeNode(classDisabledInput); // CSS disabled for input.
                 bAdd.setAttributeNode(classDisabledButton); // css disabled for button
 
+                // Deshabilitando los botones
                 disableStartButton(startButtons);
+                disableStartButton(deleteButtons);
+                disableStartButton(editButtons);
             }
         });
     });
@@ -156,6 +162,10 @@ function renderTime() {
 function markCompleted(id) {
     let taskIndex = tasks.findIndex((task) => task.id === id);
     tasks[taskIndex].completed = true;
+    tasksCompleted.unshift(tasks[taskIndex]);
+    tasks.splice(taskIndex, 1);
+    renderTasks();
+    renderTasksCompleted();
 }
 
 function startBreak() {
@@ -198,4 +208,25 @@ function updateTask() {
     oldTitle = null;
     itTask.value = "";
     taskName.textContent = "";
+}
+
+function renderTasksCompleted() {
+    const html = tasksCompleted.map(task => {
+        return `
+        <div class="task">
+            <div class="completed">
+                <span><img src="img/check.png" alt="Task Completed" width="40" height="40"></span>
+            </div>
+            <div class="title-completed">${task.title}</div>
+        </div>
+        `;
+    });
+
+    const tasksCompletedContainer = document.querySelector('#tasksCompleted');
+    const titleCompleted = document.querySelector('#title-completed');
+    const titleIncompleted = document.querySelector('#title-incompleted');
+
+    titleIncompleted.textContent = '';
+    tasksCompletedContainer.innerHTML = html.join('');
+    titleCompleted.innerHTML = '<div class="tasks-completed-title">Tareas Completadas:</div>'
 }

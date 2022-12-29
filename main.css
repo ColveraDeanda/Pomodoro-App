@@ -81,6 +81,7 @@ input[type="text"] {
     display: flex;
     gap: 10px;
     align-items: center;
+    padding: 5px;
 }
 
 .done {
@@ -130,6 +131,39 @@ input[type="text"] {
     width: 20px;
     height: 20px;
     margin-left: 3px;
+}
+
+.tasks-container-completed {
+    padding: 10px 0px 25px 30px;
+    margin: 40px;
+    height: auto;
+    background: white;
+    border-radius: 0% 0% 0% 0% / 0% 0% 0% 0% ;
+    color: white;
+    box-shadow: 5px 5px rgba(0,0,0,.15);
+    transition: all .3s ease;
+
+}
+
+.tasks-container-completed:hover {
+    border-radius: 0% 0% 0% 0% / 0% 0% 0% 0%;
+    box-shadow: 10px 10px rgba(0,0,0,.20);
+}
+
+.tasks-completed-title {
+    font-size: 25px;
+    padding: 5px;
+    color: black;
+}
+
+.title-completed {
+    color: black;
+}
+
+#title-incompleted {
+    color: black;
+    text-align: center;
+    margin-top: 10px;
 }
 
 
