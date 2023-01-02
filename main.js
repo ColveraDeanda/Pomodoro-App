@@ -211,6 +211,40 @@ function updateTask() {
 }
 
 function renderTasksCompleted() {
+
+    // Current date
+    var today = new Date();
+    var dayOfWeek = String(today.getDay());
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth()); //January is 0!
+    var yyyy = today.getFullYear();
+
+    console.log(mm);
+
+    const months = {
+        0: 'Enero',
+        1: 'Febrero',
+        2: 'Marzo',
+        3: 'Abril',
+        4: 'Mayo',
+        5: 'Junio',
+        6: 'Julio',
+        7: 'Agosto',
+        9: 'Septiembre',
+        10: 'Noviembre',
+        11: 'Diciembre'
+    };
+
+    const week = {
+        0: 'Domingo',
+        1: 'Lunes',
+        2: 'Martes',
+        3: 'Miércoles',
+        4: 'Jueves',
+        5: 'Viernes',
+        6: 'Sábado'
+      }
+
     const html = tasksCompleted.map(task => {
         return `
         <div class="task">
@@ -228,5 +262,10 @@ function renderTasksCompleted() {
 
     titleIncompleted.textContent = '';
     tasksCompletedContainer.innerHTML = html.join('');
-    titleCompleted.innerHTML = '<div class="tasks-completed-title">Tareas Completadas:</div>'
+    // Formato: Lunes, 2 de Enero 2023.. ${week[dayOfWeek]}, ${dd} de ${months[mm]} ${yyyy}
+    titleCompleted.innerHTML = `<div class="tasks-completed-title">
+                                    Tareas Completadas
+                                    <div class="last-update">Última actualización: ${week[dayOfWeek]}, ${dd} de ${months[mm]} ${yyyy}</div>
+                                    
+                                </div>`;
 }

@@ -24,7 +24,7 @@ body {
 }
 
 #time #taskName {
-    font-size: 26px;
+    font-size: 20px;
     color: #41729F;
     font-weight: bold;
 }
@@ -135,7 +135,7 @@ input[type="text"] {
 
 .tasks-container-completed {
     padding: 10px 0px 25px 30px;
-    margin: 40px;
+    margin: 27px;
     height: auto;
     background: white;
     border-radius: 0% 0% 0% 0% / 0% 0% 0% 0% ;
@@ -151,13 +151,25 @@ input[type="text"] {
 }
 
 .tasks-completed-title {
-    font-size: 25px;
-    padding: 5px;
+    font-size: 27px;
+    font-weight: bold;
+    padding: 15px;
     color: black;
+    text-align: center;
+}
+
+.tasks-completed-title .last-update {
+    font-size: 12px;
+    margin: 4px;
+    color: black;
+    font-weight: lighter;
+    text-align: center;
 }
 
 .title-completed {
     color: black;
+    margin: 13px;
+    text-align: justify;
 }
 
 #title-incompleted {
