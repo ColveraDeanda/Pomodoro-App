@@ -178,6 +178,28 @@ input[type="text"] {
     margin-top: 10px;
 }
 
+#noValueContainer {
+    margin: -12px;
+}
+
+.noValueValidation {
+    position: relative;
+    top: -16px;
+    left: 22px;
+    font-size: 15px;
+    color: #E0144C;
+    font-weight: bold;
+}
+
+.limitCharValidation {
+    position: relative;
+    top: -23px;
+    left: 12px;
+    font-size: 15px;
+    color: #E0144C;
+    font-weight: bold;
+}
+
 
 
 

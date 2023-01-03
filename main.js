@@ -15,6 +15,9 @@ const itTask = document.querySelector("#itTask"); // Input text
 const form = document.querySelector("#form");
 const taskName = document.querySelector("#time #taskName");
 const timeDiv = document.querySelector("#time #value");
+const noValue = document.querySelector('#noValueContainer');
+const limitChar = document.querySelector('#limitCharContainer');
+const space = document.querySelector('#space');
 
 renderTime();
 
@@ -24,11 +27,45 @@ form.addEventListener("submit", (e) => {
     if (isEditing) {
         updateTask();
     } else {
-        if (itTask.value !== "") {
-            createTask(itTask.value);
-            itTask.value = "";
+        if (itTask.value.trim() !== "") {
+            if (itTask.value.trim().length <= 30) {
+                console.log(itTask.value.trim().length);
+                var spanNoValue = document.querySelector('#noValueContainer #noValue');
+                var spanLimitChar = document.querySelector('#limitCharContainer #limitChar');
+                if (spanNoValue) {
+                    spanNoValue.remove();
+                    space.innerHTML = "";
+                }
+                if (spanLimitChar) {
+                    spanLimitChar.remove();
+                    space.innerHTML = "";
+                }
+                createTask(itTask.value);
+                itTask.value = "";
+                renderTasks();
+            } else {
+                var spanNoValue = document.querySelector('#noValueContainer #noValue');
+                if (spanNoValue) {
+                    spanNoValue.remove();
+                }
+                console.log(itTask.value.trim().length);
+                const br = '<br>';
+                const html = `<span id="limitChar" class="limitCharValidation"> Límite de caracteres alcanzado. </span> <br id="space">`;
+                limitChar.innerHTML = html;
+                space.innerHTML = br;
+            }
+        } else {
+            var spanLimitChar = document.querySelector('#limitCharContainer #limitChar');
+            if (spanLimitChar) {
+                spanLimitChar.remove();
+            }
+            const br = '<br>';
+            const html = `<span id="noValue" class="noValueValidation"> Por favor, ingrese una nueva tarea. </span> <br id="space">`;
+            noValue.innerHTML = html;
+            space.innerHTML = br;
         }
-        renderTasks();
+
+
     }
 });
 
@@ -243,7 +280,7 @@ function renderTasksCompleted() {
         4: 'Jueves',
         5: 'Viernes',
         6: 'Sábado'
-      }
+    }
 
     const html = tasksCompleted.map(task => {
         return `
