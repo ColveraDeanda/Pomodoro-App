@@ -8,6 +8,7 @@ let timerBreak = null;
 let current = null;
 let isEditing = false;
 let oldTitle = null;
+let deleteExtraNumber = false;
 
 // Referencia a elementos HTML
 const bAdd = document.querySelector("#bAdd"); // Botón agregar tarea
@@ -18,12 +19,34 @@ const timeDiv = document.querySelector("#time #value");
 const noValue = document.querySelector('#noValueContainer');
 const limitChar = document.querySelector('#limitCharContainer');
 const space = document.querySelector('#space');
+const letterCount = document.querySelector('#letterCount');
 
 renderTime();
 
+itTask.addEventListener("keydown", (evt) => {
+    let count = 0;
+    evt = evt || window.event;
+    let charCode = evt.keyCode || evt.which;
+    console.log('Code:' + charCode);
+    
+    if(charCode !== 32 && charCode !== 8) { // Ignoring space (charCode: 32) and delete button (charCode: 8).
+        count = itTask.value.length + 1;
+        console.log(count);
+        letterCount.innerHTML = `${count} / 100`;
+    }
+    
+    if(charCode === 8) {
+        if(itTask.value.length >= 1) {
+            count = itTask.value.length - 1;
+            console.log(count);
+            letterCount.innerHTML = `${count} / 100`;
+        }
+    }
+})
+
 form.addEventListener("submit", (e) => {
     e.preventDefault();
-
+    
     if (isEditing) {
         updateTask();
     } else {
@@ -44,6 +67,7 @@ form.addEventListener("submit", (e) => {
                 createTask(itTask.value);
                 itTask.value = "";
                 renderTasks();
+                letterCount.innerHTML = `0 / 100`;
             } else {
                 var spanNoValue = document.querySelector('#noValueContainer #noValue');
                 if (spanNoValue) {
@@ -157,6 +181,7 @@ function renderTasks() {
             const id = editBtn.getAttribute("data-id");
             const index = tasks.findIndex((task) => task.id == id);
             itTask.value = tasks[index].title;
+            letterCount.innerHTML = `${tasks[index].title.length} / 100`;
             oldTitle = itTask.value;
             isEditing = true;
             bAdd.value = "Update";
@@ -246,6 +271,7 @@ function updateTask() {
     oldTitle = null;
     itTask.value = "";
     taskName.textContent = "";
+    letterCount.innerHTML = `0 / 100`;
 }
 
 function renderTasksCompleted() {

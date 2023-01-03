@@ -63,7 +63,7 @@ input[type="text"] {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-top: 20px;
+    margin-top: 8px;
 }
 
 .task {
@@ -184,7 +184,7 @@ input[type="text"] {
 
 .noValueValidation {
     position: relative;
-    top: -16px;
+    top: -31px;
     left: 22px;
     font-size: 15px;
     color: #E0144C;
@@ -193,11 +193,20 @@ input[type="text"] {
 
 .limitCharValidation {
     position: relative;
-    top: -17px;
+    top: -33px;
     left: 12px;
     font-size: 15px;
     color: #E0144C;
     font-weight: bold;
+}
+
+.letterCount {
+    position: relative;
+    top: -8px;
+    left: 285px;
+    font-size: 13px;
+    font-weight: bold;
+    color: green;
 }
 
 
