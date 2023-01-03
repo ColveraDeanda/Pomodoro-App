@@ -28,7 +28,7 @@ form.addEventListener("submit", (e) => {
         updateTask();
     } else {
         if (itTask.value.trim() !== "") {
-            if (itTask.value.trim().length <= 30) {
+            if (itTask.value.trim().length <= 100) {
                 console.log(itTask.value.trim().length);
                 var spanNoValue = document.querySelector('#noValueContainer #noValue');
                 var spanLimitChar = document.querySelector('#limitCharContainer #limitChar');
@@ -40,6 +40,7 @@ form.addEventListener("submit", (e) => {
                     spanLimitChar.remove();
                     space.innerHTML = "";
                 }
+                space.innerHTML = "";
                 createTask(itTask.value);
                 itTask.value = "";
                 renderTasks();
