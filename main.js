@@ -25,7 +25,7 @@ renderTime();
 
 itTask.addEventListener("paste", (e) => {
     setTimeout(() => {
-        letterCount.innerHTML = `${itTask.value.length} / 100`;
+        letterCount.innerHTML = `${itTask.value.length} / 200`;
     }, 200)
 })
 
@@ -37,21 +37,21 @@ itTask.addEventListener("keydown", (evt) => {
     if (charCode !== 32 && charCode !== 8 && charCode !== 17 && charCode !== 86 && charCode !== 37 && charCode !== 39) { // Ignoring space (charCode: 32) and delete button (charCode: 8) and Ctrl (charcode: 17).
         count = itTask.value.length + 1;
         console.log(count);
-        if (count > 100) {
+        if (count > 200) {
             letterCount.style.color = 'red';
         } else {
             letterCount.style.color = 'green';
         }
-        letterCount.innerHTML = `${count} / 100`;
+        letterCount.innerHTML = `${count} / 200`;
     }
 
     if (charCode === 8) { // Delete key
         if (itTask.value.length >= 1) {
             count = itTask.value.length - 1;
             console.log(count);
-            letterCount.innerHTML = `${count} / 100`;
+            letterCount.innerHTML = `${count} / 200`;
         }
-        if (count > 100) {
+        if (count > 200) {
             letterCount.style.color = 'red';
         } else {
             letterCount.style.color = 'green';
@@ -66,7 +66,7 @@ form.addEventListener("submit", (e) => {
         updateTask();
     } else {
         if (itTask.value.trim() !== "") {
-            if (itTask.value.trim().length <= 100) {
+            if (itTask.value.trim().length <= 200) {
                 console.log(itTask.value.trim().length);
                 var spanNoValue = document.querySelector('#noValueContainer #noValue');
                 var spanLimitChar = document.querySelector('#limitCharContainer #limitChar');
@@ -82,7 +82,7 @@ form.addEventListener("submit", (e) => {
                 createTask(itTask.value);
                 itTask.value = "";
                 renderTasks();
-                letterCount.innerHTML = `0 / 100`;
+                letterCount.innerHTML = `0 / 200`;
             } else {
                 var spanNoValue = document.querySelector('#noValueContainer #noValue');
                 if (spanNoValue) {
@@ -218,7 +218,7 @@ function renderTasks() {
             const id = editBtn.getAttribute("data-id");
             const index = tasks.findIndex((task) => task.id == id);
             itTask.value = tasks[index].title;
-            letterCount.innerHTML = `${tasks[index].title.length} / 100`;
+            letterCount.innerHTML = `${tasks[index].title.length} / 200`;
             oldTitle = itTask.value;
             isEditing = true;
             bAdd.value = "Actualizar";
@@ -308,7 +308,7 @@ function updateTask() {
     oldTitle = null;
     itTask.value = "";
     taskName.textContent = "";
-    letterCount.innerHTML = `0 / 100`;
+    letterCount.innerHTML = `0 / 200`;
 }
 
 function renderTasksCompleted() {
