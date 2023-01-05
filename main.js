@@ -33,25 +33,25 @@ itTask.addEventListener("keydown", (evt) => {
     let count = 0;
     evt = evt || window.event;
     let charCode = evt.keyCode || evt.which;
-    
-    if(charCode !== 32 && charCode !== 8 && charCode !== 17 && charCode !== 86 && charCode !== 37 && charCode !== 39) { // Ignoring space (charCode: 32) and delete button (charCode: 8) and Ctrl (charcode: 17).
+
+    if (charCode !== 32 && charCode !== 8 && charCode !== 17 && charCode !== 86 && charCode !== 37 && charCode !== 39) { // Ignoring space (charCode: 32) and delete button (charCode: 8) and Ctrl (charcode: 17).
         count = itTask.value.length + 1;
         console.log(count);
-        if(count > 100) {
+        if (count > 100) {
             letterCount.style.color = 'red';
         } else {
             letterCount.style.color = 'green';
         }
         letterCount.innerHTML = `${count} / 100`;
     }
-    
-    if(charCode === 8) { // Delete key
-        if(itTask.value.length >= 1) {
+
+    if (charCode === 8) { // Delete key
+        if (itTask.value.length >= 1) {
             count = itTask.value.length - 1;
             console.log(count);
             letterCount.innerHTML = `${count} / 100`;
         }
-        if(count > 100) {
+        if (count > 100) {
             letterCount.style.color = 'red';
         } else {
             letterCount.style.color = 'green';
@@ -61,7 +61,7 @@ itTask.addEventListener("keydown", (evt) => {
 
 form.addEventListener("submit", (e) => {
     e.preventDefault();
-    
+
     if (isEditing) {
         updateTask();
     } else {
@@ -185,8 +185,30 @@ function renderTasks() {
     deleteButtons.forEach((deleteBtn) => {
         deleteBtn.addEventListener("click", (e) => {
             const index = deleteBtn.getAttribute("data-count");
-            tasks.splice(index - 1, 1);
-            renderTasks();
+            const tasktitle = tasks[index - 1].title;
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: `Estás a punto de eliminar la tarea '${tasktitle}'`,
+                icon: 'warning',
+                showCancelButton: true,
+                showCloseButton: true,
+                confirmButtonColor: '#BA0F30',
+                cancelButtonColor: '748DA6',
+                confirmButtonText: 'Eliminar',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.value) { 
+                    tasks.splice(index - 1, 1);
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'La tarea ha sido eliminada...',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    renderTasks();
+                }
+            });     
         });
     });
 
