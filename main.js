@@ -23,23 +23,38 @@ const letterCount = document.querySelector('#letterCount');
 
 renderTime();
 
+itTask.addEventListener("paste", (e) => {
+    setTimeout(() => {
+        letterCount.innerHTML = `${itTask.value.length} / 100`;
+    }, 200)
+})
+
 itTask.addEventListener("keydown", (evt) => {
     let count = 0;
     evt = evt || window.event;
     let charCode = evt.keyCode || evt.which;
-    console.log('Code:' + charCode);
     
-    if(charCode !== 32 && charCode !== 8) { // Ignoring space (charCode: 32) and delete button (charCode: 8).
+    if(charCode !== 32 && charCode !== 8 && charCode !== 17 && charCode !== 86 && charCode !== 37 && charCode !== 39) { // Ignoring space (charCode: 32) and delete button (charCode: 8) and Ctrl (charcode: 17).
         count = itTask.value.length + 1;
         console.log(count);
+        if(count > 100) {
+            letterCount.style.color = 'red';
+        } else {
+            letterCount.style.color = 'green';
+        }
         letterCount.innerHTML = `${count} / 100`;
     }
     
-    if(charCode === 8) {
+    if(charCode === 8) { // Delete key
         if(itTask.value.length >= 1) {
             count = itTask.value.length - 1;
             console.log(count);
             letterCount.innerHTML = `${count} / 100`;
+        }
+        if(count > 100) {
+            letterCount.style.color = 'red';
+        } else {
+            letterCount.style.color = 'green';
         }
     }
 })
@@ -184,8 +199,8 @@ function renderTasks() {
             letterCount.innerHTML = `${tasks[index].title.length} / 100`;
             oldTitle = itTask.value;
             isEditing = true;
-            bAdd.value = "Update";
-            taskName.textContent = `Updating task: ${oldTitle}`;
+            bAdd.value = "Actualizar";
+            taskName.textContent = `${oldTitle}`;
         });
     });
 }
