@@ -1,7 +1,36 @@
 "use strict";
 
-const tasks = [];
-const tasksCompleted = [];
+// Pendings tasks harcoded.
+const tasks = [
+    {
+        id: 'od1nwc1zq',
+        title: 'Escribir código de alta calidad y eficiente. Implementación de funcionalidades nuevas y la solución de problemas complejos.',
+        completed: false
+    },
+    {
+        id: 'tg7566178',
+        title: 'Implementar de actualizaciones y mejoras en el diseño. Incluir la creación de documentación.',
+        completed: false
+    }];
+
+// Completed tasks hardcoded.
+const tasksCompleted = [
+    {
+        id: '4a0usnp4o',
+        title: 'Diseño y arquitectura de siguiente proyecto. identificación de requisitos del sistema, selección de tecnologías la definición de la estructura general de la aplicación.',
+        completed: true
+    },
+    {
+        id: 'glwkozgcw',
+        title: 'Planificar y ejecutar proyecto de desarrollo de software. Estimación de tiempos y costos y la coordinación del trabajo del equipo.',
+        completed: true
+    },
+    {
+        id: 'x0cbfmyoe',
+        title: 'Mejorar soft skills tales como comunicación efectiva, resolución de conflictos, participación en la revisión del seguimiento del código.',
+        completed: true
+    }
+];
 let time = 0;
 let timer = null;
 let timerBreak = null;
@@ -22,6 +51,8 @@ const space = document.querySelector('#space');
 const letterCount = document.querySelector('#letterCount');
 
 renderTime();
+renderTasks();
+renderTasksCompleted();
 
 itTask.addEventListener("paste", (e) => {
     setTimeout(() => {
@@ -108,6 +139,7 @@ form.addEventListener("submit", (e) => {
 
     }
 });
+
 
 function createTask(value) {
     const newTask = {
@@ -197,7 +229,7 @@ function renderTasks() {
                 confirmButtonText: 'Eliminar',
                 reverseButtons: true
             }).then((result) => {
-                if (result.value) { 
+                if (result.value) {
                     tasks.splice(index - 1, 1);
                     Swal.fire({
                         position: 'top-end',
@@ -208,7 +240,7 @@ function renderTasks() {
                     });
                     renderTasks();
                 }
-            });     
+            });
         });
     });
 
